@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 as uuidV4 } from "uuid"; // fxn to be invoked to generate a new unique ID from uuid library
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const BudgetsContext = createContext();
 
@@ -9,8 +10,8 @@ export const useBudgets = () => {
 };
 
 export const BudgetsProvider = ({ children }) => {
-  const [budgets, setBudgets] = useState([]);
-  const [expenses, setExpenses] = useState([]);
+  const [budgets, setBudgets] = useLocalStorage("budgets", []);
+  const [expenses, setExpenses] = useLocalStorage("expenses", []);
 
   const getBudgetExpenses = (budgetId) => {
     return expenses.filter((expense) => expense.budgetId === budgetId);
