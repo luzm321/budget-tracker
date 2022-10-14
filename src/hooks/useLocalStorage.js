@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// custom hook:
+// custom hook: store budget info so when user leaves page, user can comes back with previous info intact
 const useLocalStorage = (key, defaultValue) => {
   // useState accepts the function to initialize it because by default, you want to get the value from local storage; otherwise,
   // code will fall back to the defaultValue

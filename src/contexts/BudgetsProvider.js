@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { v4 as uuidV4 } from "uuid"; // fxn to be invoked to generate a new unique ID from uuid library
 import useLocalStorage from "../hooks/useLocalStorage";
 
