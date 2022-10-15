@@ -39,18 +39,26 @@ export const BudgetsProvider = ({ children }) => {
     });
   };
 
-  const deleteBudget = ({ budgetId }) => {
-    // TODO: Deal with expenses (uncategorized budget)
+  const deleteBudget = ({ id }) => {
+    // Deleting a budget will move the expenses from that budget to the uncategorized budget:
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map((expense) => {
+        // If the expense's budgetId is not equal to the current id, just return the expense as normal as it's not the correct budget
+        if (expense.budgetId !== id) return expense;
+        // Otherwise, spread it out and return the entire expense and change that budgetId to the uncategorized budget id
+        return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID };
+      });
+    });
     // deleting budget that does not have the current id
     setBudgets((prevBudgets) => {
-      return prevBudgets.filter((budget) => budget.id !== budgetId);
+      return prevBudgets.filter((budget) => budget.id !== id);
     });
   };
 
-  const deleteExpense = ({ expenseId }) => {
+  const deleteExpense = ({ id }) => {
     // deleting expense that does not have the current id
     setExpenses((prevExpenses) => {
-      return prevExpenses.filter((expense) => expense.id !== expenseId);
+      return prevExpenses.filter((expense) => expense.id !== id);
     });
   };
 
